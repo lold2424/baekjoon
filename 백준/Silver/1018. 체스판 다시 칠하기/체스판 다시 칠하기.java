@@ -6,27 +6,27 @@ import java.util.StringTokenizer;
  
 public class Main {
  
-	public static boolean[][] arr;
-	public static int min = 64;
+	public static boolean[][] arr; // w와 b를 넣을 2차원 배열을 선언한다. 배열의 크기는 모르기 때문에 전역변수로 선언해준다.
+	public static int min = 64;	// 가장 작은값을 넣어줄 변수를 생성한다. 변수에는 가장 큰 값인 64를 넣어준다.
  
 	public static void main(String[] args) throws IOException {
  
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
  
-		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+		StringTokenizer st = new StringTokenizer(br.readLine(), " ");	// N 과 M이 한줄에 띄어쓰기로 주어지기 때문에 StringTokenizer을 이용하였다.
  
 		int N = Integer.parseInt(st.nextToken());
 		int M = Integer.parseInt(st.nextToken());
  
-		arr = new boolean[N][M];
+		arr = new boolean[N][M];	// 주어진 N과 M으로 2차원 배열을 생성하였다.
 		
  
-		// 배열 입력 
+		// 아래 코드는 배열 입력이다.
 		for (int i = 0; i < N; i++) {
 			String str = br.readLine();
 			
 			for (int j = 0; j < M; j++) {
-				if (str.charAt(j) == 'W') {
+				if (str.charAt(j) == 'W') {	// 배열이 한 문장으로 입력되기 때문에 한 글자만 선택해서 보기 위해 charAt를 이용한다.
 					arr[i][j] = true;		// W일 때는 true 
 				} else {
 					arr[i][j] = false;		// B일 때는 false
@@ -36,12 +36,12 @@ public class Main {
 		}
  
 		
-		int N_row = N - 7;
-		int M_col = M - 7;
+		int N_row = N - 7;	// 열이 총 몇가지 경우가 있는지 계산
+		int M_col = M - 7;	// 행이 총 몇가지 경우가 있는지 계산
  
 		for (int i = 0; i < N_row; i++) {
 			for (int j = 0; j < M_col; j++) {
-				find(i, j);
+				find(i, j);	// 열과 행을 1씩 올리면서 아래 만들어준 find를 이용하여 최소값을 찾아준다.
 			}
 		}
 		System.out.println(min);
@@ -49,9 +49,9 @@ public class Main {
  
 	
 	public static void find(int x, int y) {
-		int end_x = x + 8;
-		int end_y = y + 8;
-		int count = 0;
+		int end_x = x + 8;	// x축의 검색할 값에 입력받은값에 8 을 더해준다.
+		int end_y = y + 8;	// y축의 검색할 값에 입력받은값에 8 을 더해준다.
+		int count = 0;		// 몇번 다시 칠해야하는지 카운트 해줄 변수를 선언한다.
  
 		boolean TF = arr[x][y];	// 첫 번째 칸의 색 
  
