@@ -32,8 +32,7 @@
 
 해당 문제는 bfs와 dfs로 풀이가 가능하다.
 
-dfs와 bfs는 앞선 자료구조 공부에서 배웠었다. 다시 보고싶다면 [자료구조 10장 그래프(1)을 참조해보자.](https://github.com/lold2424/school_study/blob/main/data%20structure/10%EC%9E%A5%20%EA%B7%B8%EB%9E%98%ED%94%84(1).md)를 클릭해보자
-
+dfs와 bfs는 앞선 자료구조 공부에서 배웠었다. 다시 보고싶다면 [자료구조 10장 그래프(1)](https://github.com/lold2424/school_study/blob/main/data%20structure/10%EC%9E%A5%20%EA%B7%B8%EB%9E%98%ED%94%84(1).md)을 참조해보자.
 dfs는 인접행렬과 인접리스트로 나뉜다.
 
 위에 말한 세가지방법대로 풀어보았다.
