@@ -28,3 +28,8 @@
 
  <p>1번 컴퓨터가 웜 바이러스에 걸렸을 때, 1번 컴퓨터를 통해 웜 바이러스에 걸리게 되는 컴퓨터의 수를 첫째 줄에 출력한다.</p>
 
+### 문제 풀이
+
+해당 문제는 bfs와 dfs로 풀이가 가능하다.
+
+dfs와 bfs는 앞선 자료구조 공부에서 배웠었다. 다시 보고싶다면 [여기](https://github.com/lold2424/school_study/blob/main/data%20structure/10%EC%9E%A5%20%EA%B7%B8%EB%9E%98%ED%94%84(1).md)를 클릭해보자
