@@ -26,15 +26,15 @@ public class Main {
 		
 		for(int i = 0; i < N; i++) {
 			int jump = 0;
-			int count = 1;
+			int count = 1;  // 최빈값인지 확인해줄 변수
 			int i_value = arr[i];
 			
 			for(int j = i + 1; j < N; j++){
 				if(i_value != arr[j]) {
 					break;
 				}
-				count++;
-				jump++;
+				count++; // 똑같은 값이 몇번 나왔나 확인가능
+				jump++;  // 동일한 수들을 jump시켜줄 변수
 			}
 			
 			if(count > mode_max) {
