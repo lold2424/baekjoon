@@ -37,3 +37,17 @@
 <p>만약 조건을 만족하는 경기 수가 존재하지 않으면 <mjx-container class="MathJax" jax="CHTML" style="font-size: 109%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-mo class="mjx-n"><mjx-c class="mjx-c2212"></mjx-c></mjx-mo><mjx-mn class="mjx-n"><mjx-c class="mjx-c31"></mjx-c></mjx-mn></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>−</mo><mn>1</mn></math></mjx-assistive-mml><span aria-hidden="true" class="no-mathjax mjx-copytext">$-1$</span></mjx-container>을 출력한다.</p>
 
 ### 문제풀이
+
+A * N * (M * (M - 1)) / 2 + B * (N * (N - 1)) / 2) * M * M <= D
+
+여기서 A가 k * B이므로 위 식은 밑의 식과 같다.
+
+N * M((M - 1) * K + (N - 1) * M) / 2 * B <= D
+
+지역 리그의 수는 N개 이며 하나의 지역 내에서 M개의 팀 중에서 2개를 고르기에 M * (M - 1)이 되어 한 지역 리그 내의 수는 N * M * (M - 1)가 됩니다.
+
+다른 지역 리그와의 경기에서는 N개의 리그에서 두 개를 골라(N *(N - 1)) 각 리그에서 한 팀을 고르므로 N * (N - 1) * M * M이 된다.
+
+여기에 각각 A와 B를 곱한 것이 D보다 작아야 하기에 위와 같은 식이 성립하는 것이다.
+
+그렇기에 B의 값을 한 번에 구할 수 있으며 만약 B가 0이하가 아니라면 구한 B를 통해 위 식을 계산할 값을 출력하면 되고 0 이하라면 -1을 출력하면 된다.
