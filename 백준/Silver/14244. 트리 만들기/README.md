@@ -26,3 +26,4 @@
 
  <p>첫째 줄부터 n-1개의 줄에 트리의 간선 정보를 출력한다. 트리의 정점은 0번부터 n-1번까지 이다.</p>
 
+![image](https://user-images.githubusercontent.com/91832324/184469999-cfd93491-77ed-4ecf-a8e5-7aa01a6159f3.png)
