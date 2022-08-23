@@ -9,13 +9,13 @@ public class Main {
         int bunja = 1;
         int factorial = 1;
      
-        for(int i=n; i>n-k; i--) {
+        for(int i =n ; i > n - k; i--) {
             bunja *= i;
         }
 
-        for(int j=1; j<=k; j++) {
+        for(int j = 1; j <= k; j++) {
             factorial *= j;
         }
-        System.out.println(bunja/factorial);
+        System.out.println(bunja / factorial);
     }     
 }
