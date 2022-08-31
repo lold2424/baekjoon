@@ -36,5 +36,5 @@
 ![image](https://user-images.githubusercontent.com/91832324/187666649-4fdabe1c-fe59-4adb-b34f-e155ea2af4b6.png)
 
 과 같이 한다.
- > [네이버 지식백과] 조합 (두산백과 두피디아, 두산백과)
+ > ([네이버 지식백과] 조합 (두산백과 두피디아, 두산백과))[[https://terms.naver.com/entry.naver?docId=1223702&cid=40942&categoryId=32213]]
 
