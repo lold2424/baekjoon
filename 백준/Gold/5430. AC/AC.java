@@ -8,15 +8,15 @@ import java.util.Deque;
 public class Main {
 	public static void main(String[] args) throws IOException{
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		int tc = Integer.parseInt(br.readLine());
+		int T = Integer.parseInt(br.readLine());
 		StringBuilder sb = new StringBuilder();
 		
-		while(tc-- > 0) {
+		while(T-- > 0) {
 			String op = br.readLine();
 			int n = Integer.parseInt(br.readLine());
 			String[] arr = br.readLine().replace("[", "").replace("]", "").split(",");
 			sb.append(acFunction(op,n,arr));
-			if(tc!=0) sb.append("\n");
+			if(T != 0) sb.append("\n");
 		}
 		
 		System.out.println(sb.toString());
@@ -25,16 +25,16 @@ public class Main {
 	static String acFunction(String op, int n, String[] arr) {
 		Deque<Integer> q = new ArrayDeque<>();
 		
-		for(int i=0; i<n; i++) {
+		for(int i = 0; i < n; i++) {
 			q.offer(Integer.parseInt(arr[i]));
 		}
 		
 		boolean dir = true;
 		
-		for(int i=0; i<op.length(); i++) {
+		for(int i = 0; i < op.length(); i++) {
 			char type = op.charAt(i);
 			
-			if(type=='R') {
+			if(type == 'R') {
 				dir = !dir;
 			}
 			
