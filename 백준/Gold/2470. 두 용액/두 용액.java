@@ -20,24 +20,23 @@ public class Main {
 		int j = N - 1;
 		
 		int min_answer = Integer.MAX_VALUE;
-		int ans1 = 0;
-		int ans2 = 0;
+		int ans1 = 0, ans2 = 0;
 		
-		int temp, sum;
+		int absolute, sum;
 		Arrays.sort(arr);
 		
 		while (i < j) {
 			sum = arr[i] + arr[j];
-			temp = Math.abs(sum);
-			if (temp < min_answer) {
-				min_answer = temp;
+			absolute = Math.abs(sum);
+			if (absolute < min_answer) {
+				min_answer = absolute;
 				ans1 = arr[i];
 				ans2 = arr[j];
 			}
 			if (sum > 0)
-				j--;
+				j --;
 			else
-				i++;
+				i ++;
 		}
 		
 		System.out.println(ans1 + " " + ans2);
