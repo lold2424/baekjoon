@@ -1,13 +1,16 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
 
 public class Main {
 	static int res;
 	static long S;
 	static long sum;
 	
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		S = sc.nextLong();
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		
+		S = Long.parseLong(br.readLine());
 		res = 0;
 		while(true) {
 			sum += res;
