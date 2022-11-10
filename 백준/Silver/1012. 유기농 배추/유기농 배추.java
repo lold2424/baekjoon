@@ -16,6 +16,7 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         
         int t = Integer.parseInt(br.readLine());
+        
         for (int i = 0; i < t; i++) {
             st = new StringTokenizer(br.readLine());
             N = Integer.parseInt(st.nextToken());
@@ -39,6 +40,7 @@ public class Main {
                     }
                 }
             }
+            
             min = temp;
             temp = 0;
             System.out.println(min);
