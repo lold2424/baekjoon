@@ -1,66 +1,83 @@
-import static java.util.Arrays.*;
-import static java.util.stream.Collectors.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
 
-import java.util.*;
-import java.io.*;
+import java.util.Arrays;
+import java.util.StringTokenizer;
 
 public class Main {
-
-
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-         int[] input = stream(br.readLine().split(" "))
-                  .mapToInt(Integer::parseInt).toArray();
-
-         int n = input[0]; // 나라 크기
-         int query = input[1]; // 등수를 구할 나라
-
-        // 정렬 기준 : 점수 내림차순 (key)
-        TreeMap<Medal, ArrayList<Integer>> ranking = new TreeMap<>();
-
-        for(int i=0;i<n;i++){
-             int[] info = stream(br.readLine().split(" "))
-                      .mapToInt(Integer::parseInt).toArray();
-            Medal score = new Medal(info[1],info[2],info[3]);
-
-            if(ranking.containsKey(score)){  // 해당 금,은,동 점수의 국가가 또 존재할 경우 추가
-                ranking.get(score).add(info[0]);
-            }else{
-                ArrayList<Integer> nations = new ArrayList<>(); // 특정 금,은,동 스코어가 처음 나오면 Map에 추가
-                nations.add(info[0]);
-                ranking.put(score,nations);
-            }
-        }
-
-        int ans=0; // 등수
-
-        for (var entry : ranking.entrySet()) {
-            ArrayList<Integer> nations = entry.getValue();
-
-            if(nations.contains(query)){ // entry 를 탐색하던 도중 구하고 싶은 나라가 포함되어 있으면 등수 +1 하고 출력
-                System.out.println(ans+1);
-                break;
-            }else ans+=nations.size(); // 나라들이 포함되어 있는 리스트 사이즈 만큼 등수 추가
-        }
-    }
-    static class Medal implements Comparable<Medal>{
-        int gold,silver,bronze;
-
-        public Medal(int gold, int silver, int bronze) {
-            this.gold = gold;
-            this.silver = silver;
-            this.bronze = bronze;
-        }
-
-        @Override
-        public int compareTo(Medal o) {
-
-            if(o.gold == this.gold){
-                if(o.silver==this.silver)
-                    return o.bronze-this.bronze;
-                return o.silver-this.silver;
-            }
-            return o.gold-this.gold;
-        }
-    }
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer token = new StringTokenizer(br.readLine());
+		int N = Integer.parseInt(token.nextToken());
+		int K = Integer.parseInt(token.nextToken());
+		
+		Country[] countries = new Country[N];
+		for (int i = 0; i < N; i++) {
+			token = new StringTokenizer(br.readLine());
+			int n = Integer.parseInt(token.nextToken());
+			int g = Integer.parseInt(token.nextToken());
+			int s = Integer.parseInt(token.nextToken());
+			int b = Integer.parseInt(token.nextToken());
+			countries[i] = new Country(n, g, s, b);
+		}
+        
+		Arrays.sort(countries);
+		
+		int rank = 1;
+		int cnt = 1;
+        
+		for (int i = 0; i < countries.length; i++) {
+			if(i == 0) {
+				countries[i].rank = rank;
+			}else {
+				/* 금,은,동이 같다면 */
+				if(countries[i].gold == countries[i-1].gold &&
+						countries[i].silver == countries[i-1].silver &&
+							countries[i].bronze == countries[i-1].bronze) {
+					countries[i].rank = rank - cnt;
+					cnt++;
+				} else {
+					countries[i].rank = rank;
+					cnt = 1;
+				}
+			}
+            
+			rank++;
+		}
+		for(Country c : countries) {
+            
+			if(c.number == K) {
+				System.out.println(c.rank);
+				break;
+			}
+		}
+	}
+	public static class Country implements Comparable<Country>{
+		int number;
+		int gold;
+		int silver;
+		int bronze;
+		int rank;
+		
+		public Country(int n, int g, int s, int b) {
+			this.number = n;
+			this.gold = g;
+			this.silver = s;
+			this.bronze = b;
+		}
+		@Override
+		public int compareTo(Country o) {
+			// TODO Auto-generated method stub
+			if(this.gold == o.gold) {
+				if(this.silver == o.silver) {
+					return -(this.bronze - o.bronze);
+				}else {
+					return -(this.silver - o.silver);
+				}
+			}else {
+				return -(this.gold - o.gold);
+			}
+		}
+	}
 }
