@@ -66,6 +66,7 @@ public class Main {
 			this.silver = s;
 			this.bronze = b;
 		}
+        
 		@Override
 		public int compareTo(Country o) {
 			// TODO Auto-generated method stub
