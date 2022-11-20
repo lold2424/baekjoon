@@ -34,6 +34,7 @@ public class Main {
 				minP = tempP;
 			}
 		}
+        
 		System.out.println(minP);
 		System.out.println(maxP);
 	}
