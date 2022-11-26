@@ -7,7 +7,6 @@ import java.util.StringTokenizer;
 public class Main{
 	
 	static int map[][] = new int[5][5];
-	static int result;
 	static boolean find = false;
 	
 	public static void main(String[] args) throws IOException {
