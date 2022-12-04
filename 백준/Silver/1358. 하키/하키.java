@@ -4,37 +4,34 @@ import java.io.IOException;
 
 import java.util.StringTokenizer;
 
-public class Main {
-	
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringTokenizer st = new StringTokenizer(br.readLine());
-		
-		int W = Integer.parseInt(st.nextToken());
-		int H = Integer.parseInt(st.nextToken());
-		int X = Integer.parseInt(st.nextToken());
-		int Y = Integer.parseInt(st.nextToken());
-		int P = Integer.parseInt(st.nextToken());
-		
-		int x_end = X + W;
-		int y_end = Y + H;
-		int r = H / 2;
-		int Y_half = Y + r;
-		int x, y, cnt = 0;
-		
-		for(int i = 0; i < P; ++ i) {
-			st = new StringTokenizer(br.readLine());
-			x = Integer.parseInt(st.nextToken());
-			y = Integer.parseInt(st.nextToken());
-			
-			if((X <= x && x <= x_end && Y <= y && y <= y_end) || getDistance(x, y, X, Y_half) <= r || getDistance(x, y, x_end, Y_half) <= r) {
-				cnt ++;
-			}
-		}
-		
-		System.out.println(cnt);
-	}
-	public static double getDistance(int x1, int y1, int x2, int y2) {
-		return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
-	}
+public class Main{
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        
+        int W = Integer.parseInt(st.nextToken());
+        int H = Integer.parseInt(st.nextToken());
+        int X = Integer.parseInt(st.nextToken());
+        int Y = Integer.parseInt(st.nextToken());
+        int P = Integer.parseInt(st.nextToken());
+        
+        int count = 0;
+        int player_x, player_y;
+        double eq1, eq2;
+        
+        for(int i = 0; i < P ; i++){
+            st = new StringTokenizer(br.readLine());
+            
+            player_x = Integer.parseInt(st.nextToken());
+            player_y = Integer.parseInt(st.nextToken());
+            eq1 = (Math.pow(player_x - X, 2) + Math.pow(player_y - (Y + H / 2), 2));
+            eq2 = (Math.pow(player_x - (X + W), 2) + Math.pow(player_y - (Y + H / 2), 2));
+            
+            if(X <= player_x && player_x <= X + W && Y <= player_y && player_y <= Y + H)
+                count ++;
+            else if(eq1 <= Math.pow(H / 2, 2) || eq2 <= Math.pow(H / 2, 2) )
+                count ++;
+        }
+        System.out.println(String.valueOf(count));
+    }
 }
