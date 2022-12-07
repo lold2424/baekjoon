@@ -1,90 +1,70 @@
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.IOException;
-
-import java.util.StringTokenizer;
+import java.io.*;
+import java.util.*;
 
 public class Main {
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws Exception {
+		// TODO Auto-generated method stub
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		int testCase = Integer.parseInt(br.readLine());
+		
 		StringTokenizer st;
-		
-		int T = Integer.parseInt(br.readLine());
-		
-		for(int TT = 0 ; TT < T ; TT++) {
-			int[][] point = new int[4][2];
-			
-			for(int i = 0 ; i < 4 ; i++) {
+		for (int i=0; i< testCase; i++) {
+			ArrayList<Point> pointList = new ArrayList<>();
+			for (int j=0; j<4; j++) {
 				st = new StringTokenizer(br.readLine());
-				point[i][0] = Integer.parseInt(st.nextToken());
-				point[i][1] = Integer.parseInt(st.nextToken());
+				int x = Integer.parseInt(st.nextToken());
+				int y =Integer.parseInt(st.nextToken());
+				pointList.add(new Point(x, y));
 			}
 			
-			long[][] len = new long[4][4];
-			long[][] save = new long[4][3];
-			for(int i = 0 ; i < 4 ; i++) {
-				long[] tmp = new long[3];
-				for(int j = 0 ; j < 4 ; j++) {
-					if(i == j)
-						continue;
-					long x = (long)Math.pow(point[i][0] - point[j][0], 2);
-					long y = (long)Math.pow(point[i][1] - point[j][1], 2);
-					len[i][j] = x + y;
-				}
-				boolean check = false;
-				boolean fail = false;
-				int index = 0;
-				for(int j = 0 ; j < 4 ; j++) {
-					if(len[i][j] == 0) {
-						if(check) {
-							fail = true;
-							break;
-						}
-						check = true;
-						continue;
+
+			double[] len = new double[6];
+			int count=0;
+			for (int j=0; j<3; j++) {
+				for (int k=j+1; k<4; k++) {
+					if (j==0 && k==1) len[count++] = calculateDistance(pointList.get(j), pointList.get(k));
+					else {
+						len[count++] = calculateDistance(pointList.get(j), pointList.get(k));
 					}
-					tmp[index++] = len[i][j];
 				}
-				
-				if(fail) {
-					System.out.println(0);
-					break;
-				}
-				
-				save[i][0] = tmp[0];
-				save[i][1] = tmp[1];
-				save[i][2] = tmp[2];
 			}
+			boolean isSquare = true;
 			
-			long l = 0;
-			if(save[0][0] == save[0][1] || save[0][0] == save[0][2])
-				l = save[0][0];
-			else if(save[0][1] == save[0][2])
-				l = save[0][1];
-			else {
-				System.out.println(0);
-				continue;
+			//정사각형이면 변의 길이를 sort했을때 앞에 4개의 값은 4개의 변이 되고
+			//뒤의 2개의 값은 대각선이 될 것이다. 
+			Arrays.sort(len);
+			// 4개의 변중 하나라도 다르면 정사각형 X
+			for (int j=1; j<4; j++) {
+				if (len[0] != len[j]) isSquare = false;
 			}
+			// 대각선의 길이가 같지 않으면 정사각형 X
+			if (len[4]!=len[5]) isSquare = false;
 			
-			boolean check = false;
-			for(int i = 0 ; i < 4 ; i++) {
-				int count = 0;
-				int tmp = 0;
-				for(int j = 0 ; j < 3 ; j++)
-					if(save[i][j] == l)
-						count++;
-					else
-						tmp += save[i][j];
-				
-				if(count != 2 || (2*l) != tmp) {
-					System.out.println(0);
-					check = true;
-					break;
-				}
-			}
-			if(!check)
-				System.out.println(1);
+			if (isSquare)
+				bw.write(1 + "\n");
+			else
+				bw.write(0 + "\n");
 		}
+		bw.flush();
+		bw.close();
+		br.close();
+		
+	}
+	static double calculateDistance(Point point1, Point point2) {
+		int dx = point1.x - point2.x;
+		int dy = point1.y - point2.y;
+		return Math.sqrt(Math.pow(dx, 2)+Math.pow(dy, 2));
+	}
+
+}
+class Point {
+	int x; 
+	int y;
+	
+	public Point (int x, int y) {
+		this.x = x; 
+		this.y = y;
 	}
 }
