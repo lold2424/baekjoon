@@ -16,7 +16,7 @@ public class Main {
 		String str = br.readLine();
 		String[] input = str.split(" ");
 		
-		int calVal =Integer.parseInt(input[0]);
+		int calVal = Integer.parseInt(input[0]);
 		arrSize = (2 * calVal) - 1;
 		values = new int[arrSize];
 		dateCount = Integer.parseInt(input[1]);
@@ -28,7 +28,7 @@ public class Main {
 			int startPoint =Integer.parseInt(st.nextToken());
 			int onePoint = Integer.parseInt(st.nextToken());
 			
-			for(int j = startPoint; j<startPoint + onePoint; j++){
+			for(int j = startPoint; j < startPoint + onePoint; j++){
 				values[j] = values[j] + 1;
 			}
 			
