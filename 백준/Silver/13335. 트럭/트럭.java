@@ -38,9 +38,9 @@ public class Main {
 			if(!truck.isEmpty()) {
 				if(truck.peek() + bridge_weight <= L) {
 					bridge_weight += truck.peek();
-					bridge.offer(truck.poll());
+					bridge.add(truck.poll());
 				} else {
-					bridge.offer(0);
+					bridge.add(0);
 				}
 			}
 		}
