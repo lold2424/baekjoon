@@ -48,7 +48,7 @@ public class Main {
 				police = tmp;
 			}
 		}
- 
+		
 		for (int i = 0; i < shop; i++) {
 			int path1 = Math.abs(police - map[i]);
 			int path2 = 2 * width + 2 * length - path1;
