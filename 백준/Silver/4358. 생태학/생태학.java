@@ -2,41 +2,40 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Main {
 	
-	static HashMap<String, Integer> trees;
-	static int allCount;
-	
-	public static void main(String args[]) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringBuilder sb = new StringBuilder();
-		trees = new HashMap<String, Integer>();
-		
-		String str = br.readLine();
-		
-		while(true) {
-            trees.put(str, trees.getOrDefault(str, 0) + 1);
-			allCount++;
-			
-			str = br.readLine();
-			
-			if(str == null || str.length() == 0) break;
-		}
-		
-		Object[] keys = trees.keySet().toArray();
-		Arrays.sort(keys);
-		
-		for(Object key : keys) {
-			String keyStr = (String)key;
-			int count = trees.get(keyStr);
-			double per = (double)(count * 100.0) / allCount;
-			
-			sb.append(keyStr + " " + String.format("%.4f", per) + "\n"); 
-		}
-		
-		System.out.println(sb.toString());
-	}
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
+        Map<String, Integer> map = new HashMap<>();
+        
+        String str;
+        int cnt = 0;
+        
+        while((str = br.readLine()) != null) {
+        	cnt ++;
+            map.put(str, map.getOrDefault(str, 0) + 1);
+        }
+        
+        List<String> list = new ArrayList<>();
+        for(Map.Entry<String, Integer> entry : map.entrySet()) {
+            String tree = entry.getKey();
+            list.add(tree);
+        }
+        
+        Collections.sort(list);
+        
+        for(String tree : list) {
+            int count = map.get(tree) * 100;
+            sb.append(tree + " " + String.format("%.4f", (double)count / (double)cnt) + "\n");
+        }
+        
+        System.out.print(sb);
+    }
 }
