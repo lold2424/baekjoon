@@ -8,7 +8,7 @@ public class Main {
 	
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        Stack<Double> operand = new Stack<>();
+        Stack<Double> stack = new Stack<>();
         
         int N = Integer.parseInt(br.readLine());
         String prefix = br.readLine();
@@ -25,10 +25,10 @@ public class Main {
             char ch = prefix.charAt(i);
             if('A' <= ch && ch <= 'Z') {
                 double d = arr[ch - 'A'];
-                operand.push(d);
+                stack.push(d);
             } else {
-                double d1 = operand.pop();
-                double d2 = operand.pop();
+                double d1 = stack.pop();
+                double d2 = stack.pop();
                 double d3 = 0.0;
                 switch(ch) {
                     case '+' :
@@ -44,10 +44,10 @@ public class Main {
                         d3 = d2 / d1;
                         break;
                 }
-                operand.push(d3);
+                stack.push(d3);
             }
         }
         
-        System.out.printf("%.2f", operand.pop());
+        System.out.printf("%.2f", stack.pop());
     }
 }
