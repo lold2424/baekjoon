@@ -48,7 +48,6 @@ public class Main {
 				}
 				return sum;
 			}
-
 		});
 
 		for (int i = 0; i < itemList.size(); i++) {
