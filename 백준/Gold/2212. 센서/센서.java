@@ -1,49 +1,38 @@
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.util.Arrays;
 import java.util.StringTokenizer;
-	
+
 public class Main {
-	
+
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		StringTokenizer st;
+		StringTokenizer st = new StringTokenizer(br.readLine());
 		
-		int N = Integer.parseInt(br.readLine());
-		int K = Integer.parseInt(br.readLine());
+		int N = Integer.parseInt(st.nextToken());
+		st = new StringTokenizer(br.readLine());
+		int K = Integer.parseInt(st.nextToken());
 		
-		if (K >= N) {
-			bw.write("0\n");
-			bw.close();
-			br.close();
-			return;
-		}
-		
-		int[] censor = new int[N];
+		int[] arr = new int[N];
+		int[] dist = new int[N - 1];
 		st = new StringTokenizer(br.readLine());
 		for (int i = 0; i < N; i++) {
-			int temp = Integer.parseInt(st.nextToken());
-			censor[i] = temp;
+			arr[i] = Integer.parseInt(st.nextToken());
 		}
-		Arrays.sort(censor);
 		
-		int[] dif = new int[N - 1];
+		Arrays.sort(arr);
+		
 		for (int i = 0; i < N - 1; i++) {
-			dif[i] = censor[i + 1] - censor[i];
+			dist[i] = arr[i + 1] - arr[i];
 		}
-		Arrays.sort(dif);
 		
-		int ans = 0;
+		Arrays.sort(dist);
+		int rst = 0;
+		
 		for (int i = 0; i < N - K; i++) {
-			ans += dif[i];
+			rst += dist[i];
 		}
-		
-		bw.write(ans + "\n");
-		bw.flush();
-		bw.close();
-		br.close();
+
+		System.out.println(rst);
 	}
 }
