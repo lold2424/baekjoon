@@ -1,51 +1,46 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.function.Function;
 
 public class Main {
-	static char[][] chars;
-	static int numbers[];
-	static int N, R, ans = 1;
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        Function<String, Integer> parseIntFunction = Integer::parseInt;
 
-	public static void main(String[] args) throws IOException {
+        int N = parseIntFunction.apply(br.readLine());
+        String[] strings = new String[N];
 
-		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+        for (int i = 0; i < N; i++) {
+            strings[i] = br.readLine();
+        }
 
-		N = Integer.parseInt(in.readLine());
+        Arrays.sort(strings, (str1, str2) -> str2.length() - str1.length());
+        List<String> nonPrefixStrings = new ArrayList<>();
 
-		chars = new char[N][];
+        for (String currentString : strings) {
+            if (nonPrefixStrings.size() == 0) {
+                nonPrefixStrings.add(currentString);
+                continue;
+            }
 
-		for (int i = 0; i < N; i++) {
-			chars[i] = in.readLine().toCharArray();
-		}
+            boolean isPrefix = false;
 
-		Arrays.sort(chars, (char[] o1, char[] o2)->{
-			return o1.length - o2.length;
-		});
+            for (String existingString : nonPrefixStrings) {
+                if (existingString.indexOf(currentString) == 0) {
+                    isPrefix = true;
+                    break;
+                }
+            }
 
-		ans = N;
-		for(int i=N-1;i>=0;i--) {
+            if (!isPrefix) {
+                nonPrefixStrings.add(currentString);
+            }
+        }
 
-			for(int j=0;j<i;j++) {
-				boolean check = false;
-				for(int k=0;k<chars[j].length;k++) {
-					if(chars[j][k] == '.' || chars[i][k] != chars[j][k]) {
-						check = true;
-					}
-				}
-				if(!check) {
-					for(int k=0;k<chars[j].length;k++) {
-						chars[j][k] = '.';
-					}
-					ans--;
-				}
-
-			}
-		}
-
-
-		System.out.println(ans);
-	}
-
+        System.out.println(nonPrefixStrings.size());
+    }
 }
