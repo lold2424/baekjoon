@@ -1,79 +1,73 @@
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 public class Main {
-	static class Node {
-		int left;
-		int right;
+    public static class Tree {
+        String parent;
+        Tree left = null;
+        Tree right = null;
+    }
 
-		public Node(int left, int right) {
-			this.left = left;
-			this.right = right;
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
+        Tree[] input = new Tree[26];
+        for (int i = 0; i < N; i++) {
+            input[i] = new Tree();
+        }
+        int site = 0;
+        for (int i = 0; i < N; i++) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            String parent = st.nextToken();
+            String leftChild = st.nextToken();
+            String rightChild = st.nextToken();
+            for (int j = 0; j <= site; j++) {
+                if (site == 0) {
+                    input[site].parent = parent;
+                }
+                if (input[j].parent.equals(parent)) {
+                    if (!leftChild.equals(".")) {
+                        input[j].left = input[++site];
+                        input[site].parent = leftChild;
+                    }
+                    if (!rightChild.equals(".")) {
+                        input[j].right = input[++site];
+                        input[site].parent = rightChild;
+                    }
+                }
+            }
+        }
+        br.close();
+        preOrderTraversal(input[0]);
+        System.out.println();
+        inOrderTraversal(input[0]);
+        System.out.println();
+        postOrderTraversal(input[0]);
+    }
 
-		}
-	}
-	static List<Node>[] list;
-	static StringBuilder sb = new StringBuilder();
-	public static void main(String[] args) throws IOException{
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringTokenizer st = null;
-		int n = Integer.parseInt(br.readLine());
-		
-		list = new ArrayList[n+1];
-		for(int i=1; i<n+1; i++) {
-			list[i] = new ArrayList<>();
-		}
-		
-		for(int i=1; i<n+1; i++) {
-			String[] line = br.readLine().split(" ");
-			int data = line[0].charAt(0) -'A'+1;
-			int left = line[1].charAt(0) -'A'+1;
-			int right = line[2].charAt(0) -'A'+1;
-			list[data].add(new Node(left, right));
-		}
-		
-		preorder(1);
-		sb.append("\n");
-		inorder(1);
-		sb.append("\n");
-		postorder(1);
-		System.out.println(sb.toString());
-		
-	}
-	
-	// 전위 순회 root > left > right
-	static void preorder(int start) {
-		for(Node node : list[start]) {
-			int l = node.left;
-			int r = node.right;
-			
-			sb.append((char)(start+'A'-1));
-			if(l != -18) preorder(l);
-			if(r != -18) preorder(r);
-		}
-	}
-	
-	// 중위 순회 left > root > right
-	static void inorder(int start) {
-		for(Node node : list[start]) {
-			int l = node.left;
-			int r = node.right;
-			
-			if(l != -18) inorder(l);
-			sb.append((char)(start+'A'-1));
-			if(r != -18) inorder(r);
-		}
-	}
-	
-	// 후위 순회 left > right > root
-	static void postorder(int start) {
-		for(Node node : list[start]) {
-			int l = node.left;
-			int r = node.right;
-			
-			if(l != -18) postorder(l);
-			if(r != -18) postorder(r);
-			sb.append((char)(start+'A'-1));
-		}
-	}
+    public static void preOrderTraversal(Tree root) {
+        if (root != null) {
+            System.out.print(root.parent);
+            preOrderTraversal(root.left);
+            preOrderTraversal(root.right);
+        }
+    }
+
+    public static void inOrderTraversal(Tree root) {
+        if (root != null) {
+            inOrderTraversal(root.left);
+            System.out.print(root.parent);
+            inOrderTraversal(root.right);
+        }
+    }
+
+    public static void postOrderTraversal(Tree root) {
+        if (root != null) {
+            postOrderTraversal(root.left);
+            postOrderTraversal(root.right);
+            System.out.print(root.parent);
+        }
+    }
 }
