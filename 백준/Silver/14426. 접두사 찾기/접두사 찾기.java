@@ -14,49 +14,48 @@ class TrieNode {
 }
 
 public class Main {
-	static TrieNode root;
+    static TrieNode root;
 
-	static void insert(String word) {
-		TrieNode currentNode = root;
-		for (char c : word.toCharArray()) {
-			currentNode.children.putIfAbsent(c, new TrieNode());
-			currentNode = currentNode.children.get(c);
-		}
-		currentNode.isEndOfWord = true;
-	}
+    static void insert(String word) {
+        TrieNode current = root;
+        for (char c : word.toCharArray()) {
+            current.children.putIfAbsent(c, new TrieNode());
+            current = current.children.get(c);
+        }
+        current.isEndOfWord = true;
+    }
 
-	static boolean searchPrefix(String prefix) {
-		TrieNode currentNode = root;
-		for (char c : prefix.toCharArray()) {
-			if (!currentNode.children.containsKey(c)) {
-				return false;
-			}
-			currentNode = currentNode.children.get(c);
-		}
-		return true;
-	}
+    static boolean searchPrefix(String prefix) {
+        TrieNode current = root;
+        for (char c : prefix.toCharArray()) {
+            if (!current.children.containsKey(c)) {
+                return false;
+            }
+            current = current.children.get(c);
+        }
+        return true;
+    }
 
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String[] NM = br.readLine().split(" ");
+        int N = Integer.parseInt(NM[0]);
+        int M = Integer.parseInt(NM[1]);
 
-		String[] NM = br.readLine().split(" ");
-		int numberOfStrings = Integer.parseInt(NM[0]);
-		int numberOfQueries = Integer.parseInt(NM[1]);
+        root = new TrieNode();
+        for (int i = 0; i < N; i++) {
+            String word = br.readLine();
+            insert(word);
+        }
 
-		root = new TrieNode();
-		for (int i = 0; i < numberOfStrings; i++) {
-			String string = br.readLine();
-			insert(string);
-		}
+        int cnt = 0;
+        for (int i = 0; i < M; i++) {
+            String word = br.readLine();
+            if (searchPrefix(word)) {
+                cnt++;
+            }
+        }
 
-		int count = 0;
-		for (int i = 0; i < numberOfQueries; i++) {
-			String query = br.readLine();
-			if (searchPrefix(query)) {
-				count++;
-			}
-		}
-
-		System.out.println(count);
-	}
+        System.out.println(cnt);
+    }
 }
