@@ -1,14 +1,14 @@
-# [Silver II] 접두사 찾기 - 14426 
+# [Silver I] 접두사 찾기 - 14426 
 
 [문제 링크](https://www.acmicpc.net/problem/14426) 
 
 ### 성능 요약
 
-메모리: 28592 KB, 시간: 716 ms
+메모리: 300400 KB, 시간: 748 ms
 
 ### 분류
 
-자료 구조(data_structures), 문자열(string), 트리(trees), 트라이(trie)
+이분 탐색, 자료 구조, 문자열, 트리, 트라이
 
 ### 문제 설명
 
