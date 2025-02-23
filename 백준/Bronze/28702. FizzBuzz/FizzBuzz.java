@@ -8,13 +8,12 @@ public class Main {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
 		String[] arr = new String[3];
-		String nextNum = null;
+		int nextNum = 0;
 		
 		for (int i = 0; i < 3; i ++) {
-			
 			arr[i] = br.readLine();
 			if (checkNum(arr[i])) {
-				nextNum = Integer.toString(Integer.parseInt(arr[i]) + (3 - i));
+				nextNum = (Integer.parseInt(arr[i]) + (3 - i));
 			}
 		}
 		System.out.println(checkFizzBuzz(nextNum));
@@ -27,18 +26,17 @@ public class Main {
 		return false;
 	}
 	
-	public static String checkFizzBuzz(String nextNum) {
-		int num = Integer.parseInt(nextNum);
-		if (num % 3 == 0 && num % 5 == 0) {
+	public static String checkFizzBuzz(int nextNum) {
+		if (nextNum % 3 == 0 && nextNum % 5 == 0) {
 			return "FizzBuzz";
 		}
-		else if (num % 3 == 0) {
+		else if (nextNum % 3 == 0) {
 			return "Fizz";
 		}
-		else if (num % 5 == 0){
+		else if (nextNum % 5 == 0){
 			return "Buzz";
 		}
 		
-		return nextNum;
+		return Integer.toString(nextNum);
 	}
 }
