@@ -3,49 +3,62 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Main {
-	public static void main (String args[]) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		
-		int n = Integer.parseInt(br.readLine());
-		String inputStr = br.readLine();
-		char str[] = inputStr.toCharArray();
-		
-		String currentWord = inputStr;
-		
-		int cycleLength = 0;
-		do {
-			currentWord = reverseBlink(currentWord);
-			cycleLength ++;
-		} while (!currentWord.equals(inputStr));
-		
-		long effectiveN = n % cycleLength;
-		
-		String answerWord = inputStr;
-		
-		for (long i = 0; i < effectiveN; i ++) {
-			answerWord = reverseBlink(answerWord);
-		}
-		
-		System.out.println(answerWord);
-	}
-	
-	static String reverseBlink(String word) {
-		char[] chars = word.toCharArray();
-		int len = chars.length;
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-		StringBuilder frontPart = new StringBuilder();
-		StringBuilder backPart = new StringBuilder();
+        long n = Long.parseLong(br.readLine());
+        String scrambledWord = br.readLine();
 
-		for (int i = 0; i < len; i++) {
-			if (i % 2 == 0) {
-				frontPart.append(chars[i]);
-			} else {
-				backPart.append(chars[i]);
-			}
-		}
+        BlinkingWord puzzle = new BlinkingWord(scrambledWord);
+        
+        String originalWord = puzzle.findOriginalWord(n);
 
-		backPart.reverse();
+        System.out.println(originalWord);
+    }
+}
 
-		return frontPart.toString() + backPart.toString();
-	}
+class BlinkingWord {
+    private final String scrambledWord;
+    private int cycleLength;
+
+    public BlinkingWord(String scrambledWord) {
+        this.scrambledWord = scrambledWord;
+        this.cycleLength = calculateCycleLength();
+    }
+
+    public String findOriginalWord(long n) {
+        long effectiveBlinks = n % this.cycleLength;
+
+        String currentWord = this.scrambledWord;
+        for (long i = 0; i < effectiveBlinks; i++) {
+            currentWord = reverseBlink(currentWord);
+        }
+        return currentWord;
+    }
+
+    private int calculateCycleLength() {
+        String currentWord = this.scrambledWord;
+        int count = 0;
+        do {
+            currentWord = reverseBlink(currentWord);
+            count++;
+        } while (!currentWord.equals(this.scrambledWord));
+        return count;
+    }
+
+    private String reverseBlink(String word) {
+        char[] chars = word.toCharArray();
+        StringBuilder frontPart = new StringBuilder();
+        StringBuilder backPart = new StringBuilder();
+
+        for (int i = 0; i < chars.length; i++) {
+            if (i % 2 == 0) {
+                frontPart.append(chars[i]);
+            } else {
+                backPart.append(chars[i]);
+            }
+        }
+        backPart.reverse();
+        return frontPart.toString() + backPart.toString();
+    }
 }
